@@ -1,6 +1,9 @@
+const { Stream } = require("stream");
 const db = require("../models");
 const Product = db.products;
 const Op = db.Sequelize.Op; // don't need it at the moment
+var path = require("path");
+var fs = require("fs");
 // Create and Save a new Product
 
 exports.create = (req, res) => {
@@ -47,4 +50,19 @@ exports.findAll = (req, res) => {
         message: err.message || "Some error occurred while retrieving Products.",
       });
     });
+};
+
+exports.getSingleImg = (req, res) => {
+  var filepath = path.resolve(process.env.UPLOAD_PATH, req.params.file);
+  filepath = filepath.replace(/\.[^/.]+$/, ".jpeg");
+  console.log(filepath);
+  const r = fs.createReadStream(filepath);
+  const ps = new Stream.PassThrough();
+  Stream.pipeline(r, ps, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  ps.pipe(res);
+  return;
 };

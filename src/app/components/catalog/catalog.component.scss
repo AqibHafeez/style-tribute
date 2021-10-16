@@ -28,3 +28,14 @@
   width: 100px !important;
   height: 100px !important;
 }
+
+.serv ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+}
+
+.serv ul li {
+  list-style: none;
+  flex: 0 0 33.333333%;
+}

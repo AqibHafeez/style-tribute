@@ -8,5 +8,7 @@ module.exports = (app) => {
   router.post("/create", multipartMiddleware, products.create);
   // Retrieve all Products
   router.get("/getAll", products.findAll);
+  // We are currently not allowed to access files directly within docker container thats why using seprate endpoint for that.
+  router.get("/uploads/:file", products.getSingleImg);
   app.use("/api/products", router);
 };

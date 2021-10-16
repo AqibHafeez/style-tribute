@@ -20,4 +20,7 @@ export class ProductService {
   public getAllProducts(): Observable<any> {
     return this.httpClient.get<any>(environment.BASE_API_URL + "getAll");
   }
+  public getImage(name: string): Observable<any> {
+    return this.httpClient.get<any>(environment.BASE_API_URL + "uploads/" + name);
+  }
 }

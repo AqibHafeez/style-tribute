@@ -5,9 +5,13 @@
 <div class="no-data" *ngIf="products.length == 0; else show_data">No Products Found!</div>
 <ng-template #show_data>
   <div class="d-flex justify-content-around align-items-end">
-    <div *ngFor="let product of products" class="shimpment-inst">
-      <img src="http://placehold.it/350x150" class="img-fix" />
-      <p>{{ product.name | titlecase }}</p>
+    <div class="serv">
+      <ul class="shimpment-inst">
+        <li *ngFor="let product of products; let i = index">
+          <img [src]="images[i]" class="img-fix" />
+          <p>{{ product.name | titlecase }}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </ng-template>

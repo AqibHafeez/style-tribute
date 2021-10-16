@@ -3,13 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const db = require("./app/models");
-const bodyParser = require("body-parser");
-// app.use(bodyParser.json());
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: false,
-//   })
-// );
+const path = require("path");
+app.use("/images", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 db.sequelize.sync();
 // // drop the table if it already exists

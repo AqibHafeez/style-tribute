@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "../../services/product.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Subscription } from "rxjs";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "app-catalog",
@@ -24,11 +25,6 @@ export class CatalogComponent implements OnInit, OnDestroy {
       this.productService.getAllProducts().subscribe(
         (res: any) => {
           this.products = res;
-          this.images = new Array(res.length);
-          res.forEach((data, index) => {
-            this.readImageFile(index, data.image);
-          });
-
           this.spinner.hide();
         },
         (err) => {
@@ -37,14 +33,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
       )
     );
   }
-  public readImageFile(idx, url) {
-    if (url) {
-      this.sub.add(
-        this.productService.getImage(url).subscribe((res: any) => {
-          this.images[idx] = "data:image/jpg;base64," + res;
-        })
-      );
-    }
+  public getImage(fileName: string): string {
+    return `${environment.IMG_BASE_URL}` + fileName;
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

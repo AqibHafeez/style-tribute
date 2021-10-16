@@ -6,9 +6,9 @@
 <ng-template #show_data>
   <div class="d-flex justify-content-around align-items-end">
     <div class="serv">
-      <ul class="shimpment-inst">
+      <ul class="shimpment-inst" style="gap: 25px">
         <li *ngFor="let product of products; let i = index">
-          <img [src]="images[i]" class="img-fix" />
+          <img [src]="getImage(product.image)" class="img-fix ml-2" />
           <p>{{ product.name | titlecase }}</p>
         </li>
       </ul>

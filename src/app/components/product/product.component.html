@@ -1,0 +1,27 @@
+<h1 class="product-heading">Add New Product</h1>
+<div class="row mb-3">
+  <div class="container w-50 mt-5">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="productName" class="weight-600">Product Name <span class="mandatory"> *</span></label>
+        <input
+          type="text"
+          #name="ngModel"
+          [(ngModel)]="product.name"
+          class="form-control"
+          name="productName"
+          placeholder="Enter Product Name"
+          [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+          required
+        />
+      </div>
+      <div class="form-group mt-3">
+        <label for="productImage" class="weight-600">Product Image <span class="mandatory"> *</span></label>
+        <input type="file" (change)="handleFileInput($event.target.files)" class="form-control" />
+      </div>
+      <button type="submit" [disabled]="f.invalid" class="btn theme-btn mt-3">Save</button>
+    </form>
+  </div>
+</div>
+
+<app-catalog> </app-catalog>

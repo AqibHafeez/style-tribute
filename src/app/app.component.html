@@ -1,0 +1,21 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Style Tribute</span>
+      <!-- <a href="/home" mat-raised-button color="primary">Home</a>
+      <a href="/about-us" mat-raised-button color="primary">About</a>
+      <a href="/admin/login" mat-raised-button color="primary">Admin Login</a>
+      <a href="/admin/register" mat-raised-button color="primary">Admin Register</a> -->
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+<router-outlet>
+  <app-product> </app-product>
+</router-outlet>

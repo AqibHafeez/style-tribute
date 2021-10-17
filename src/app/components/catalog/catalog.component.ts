@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { ProductService } from "../../services/product.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Subscription } from "rxjs";
@@ -9,7 +9,8 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./catalog.component.html",
   styleUrls: ["./catalog.component.scss"],
 })
-export class CatalogComponent implements OnInit, OnDestroy {
+export class CatalogComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() fetchUpdated: boolean;
   public products: any[] = [];
   public images: any[] = [];
   private sub = new Subscription();
@@ -18,8 +19,17 @@ export class CatalogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAllProducts();
   }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.fetchUpdated.currentValue) {
+      // Manually giving timeout as locally there is no delay in response time.
+      setTimeout(() => {
+        this.getAllProducts();
+      }, 2000);
+    }
+  }
 
   public getAllProducts(): void {
+    this.products = [];
     this.spinner.show();
     this.sub.add(
       this.productService.getAllProducts().subscribe(

@@ -13,9 +13,8 @@ services:
   app:
     depends_on:
       - mysqldb
-    links:
-      - mysqldb
     build: ./styletribute-app
+    command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
     restart: unless-stopped
     env_file: ./.env
     ports:
